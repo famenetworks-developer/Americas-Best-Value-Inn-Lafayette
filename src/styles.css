@@ -147,3 +147,37 @@
   .page-hero p{font-size:12px}
 }
 
+/* Bright, editorial homepage hero */
+.hero-home .hero-slide:nth-of-type(1){content:url('/assets/hero-premium/home-room-bright-v3.png')}
+.hero-home .hero-slide:nth-of-type(2){content:url('/assets/hero-premium/home-exterior-bright-v3.png')}
+.hero-home .hero-slide:nth-of-type(3){content:url('/assets/hero-premium/home-lobby-bright-v3.png')}
+.hero-home .hero-slide{
+  filter:saturate(.96) contrast(1.02) brightness(1.07);
+  object-position:center;
+}
+.hero-home .hero-overlay{
+  background:
+    radial-gradient(ellipse at 50% 43%,#17100838 0%,#1710081f 40%,#17100854 100%),
+    linear-gradient(90deg,#130d093f 0%,transparent 30%,transparent 70%,#130d0938 100%),
+    linear-gradient(0deg,#120c086b 0%,transparent 34%,#fff0 100%);
+}
+.hero-home .hero-content h1{
+  text-shadow:0 3px 10px #1b120bd9,0 12px 36px #1b120b8f;
+}
+.hero-home .hero-content>p{
+  font-weight:500;
+  text-shadow:0 2px 7px #1b120be8,0 6px 18px #1b120b9e;
+}
+.hero-home .hero-content>.kicker{text-shadow:0 2px 7px #1b120be8}
+.hero-home .hero-buttons .button--ghost{
+  background:#1b130b2e;
+  backdrop-filter:blur(4px);
+}
+@media(max-width:560px){
+  .hero-home .hero-overlay{
+    background:
+      radial-gradient(ellipse at 50% 42%,#17100848 0%,#17100826 42%,#17100862 100%),
+      linear-gradient(0deg,#120c0870 0%,transparent 45%);
+  }
+}
+
