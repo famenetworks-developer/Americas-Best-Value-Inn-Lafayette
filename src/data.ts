@@ -21,4 +21,4 @@ export const faqs = [
  ['How do I see prices and cancellation terms?','Follow Check availability to the official Sonesta hotel page. Select your dates there to see live rates, available rooms, taxes and the cancellation conditions for your chosen rate.'],
  ['How can I contact the hotel?',`Call ${hotel.phone}. For group travel inquiries, Sonesta lists Sales@redlion.com as its sales contact.`],
 ];
-export const nav = [['Rooms','rooms'],['Amenities','amenities'],['Location','location'],['Gallery','gallery']];
+export const nav = [['Rooms','rooms'],['Amenities','amenities'],['Location','location'],['Gallery','gallery']] as const;

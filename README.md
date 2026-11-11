@@ -1,6 +1,6 @@
 # Americas Best Value Inn Lafayette
 
-React 19 + TypeScript + Vite. One substantive, statically rendered hotel page with React hydration. Source is in `src/`; hotel facts and room options are centralized in `src/data.ts`. Custom CSS follows the supplied reference's navy rail navigation, cream and sand sections, brass accents, serif headings, rectangular buttons and spacious layouts.
+React 19 + TypeScript + Vite. Five statically rendered hotel pages with React hydration: Home, Rooms, Amenities, Location and Gallery. Source is in `src/`; hotel facts and room options are centralized in `src/data.ts`. Custom CSS follows the supplied reference's navy rail navigation, cream and sand sections, brass accents, serif headings, rectangular buttons and spacious layouts.
 
 ## Run locally
 
@@ -17,7 +17,7 @@ npm test
 npm run preview
 ```
 
-The build type-checks TypeScript, bundles assets, renders the entire React page into HTML, and generates a custom 404, robots.txt and sitemap.xml. Development mode is for editing; use the production build for SEO checks.
+The build type-checks TypeScript, bundles assets, renders every route into its own HTML file, and generates a custom 404, robots.txt and five-route sitemap.xml. Development mode is for editing; use the production build for SEO checks.
 
 ## Public launch configuration
 
