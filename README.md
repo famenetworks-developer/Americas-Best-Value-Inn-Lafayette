@@ -31,10 +31,10 @@ Serve `dist/` as a static website. Configure the host to return `404.html` with 
 
 ## Assets and content
 
-Only official Sonesta logo and property photography are used, as requested. Fonts are locally hosted; photos are WebP with dimensions and a smaller gallery variant. See `RESEARCH.md` for evidence, source conflicts and unavailable photography. Do not add a room photo until both its permission and room mapping are established.
+The official Sonesta logo is paired with real property photographs from the supplied hotel listings. Room photographs are presented as listing photography, with a visible note that exact layouts and assignments must be confirmed during booking. Fonts are locally hosted. See `RESEARCH.md` for evidence and source conflicts.
 
 ## Verification
 
 `npm test` checks built HTML, local assets, internal anchors, booking destinations, image alternatives/dimensions, schema consistency and private-preview indexing. Tests expect the default private preview configuration; adjust the indexing assertion when deliberately releasing a public build.
 
-The automation browser host was unavailable in this environment. Therefore browser interaction, visual comparison at device widths, console inspection, Lighthouse, Google Rich Results Test and Schema.org's online validator still require a browser QA pass. No scores or successful external validation are claimed.
+The completed page was visually inspected in the local VS Code browser at desktop width, including the hero, fixed rail and long-page sections. Lighthouse, Google Rich Results Test and Schema.org's online validator remain external launch checks; no scores or successful external validation are claimed.
