@@ -181,18 +181,5 @@
   }
 }
 
-/* Soft, readable typography for the bright homepage hero */
-.hero-home .hero-content h1,.hero-home .hero-content h1 em{
-  color:#2b2018;
-  text-shadow:0 1px 0 #fffaf0cc,0 3px 12px #fff7e89c;
-}
-.hero-home .hero-content>p{
-  color:#30261f;
-  text-shadow:0 1px 1px #fffaf0,0 2px 8px #fff7e8c7;
-}
-.hero-home .hero-content>.kicker{
-  color:#7b541d;
-  text-shadow:0 1px 5px #fffaf0d9;
-}
 
 
