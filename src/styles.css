@@ -40,3 +40,32 @@
 @media(max-width:800px){.hero-home .hero-content{padding-top:8rem}.hero-home .hero-content h1{font-size:clamp(3.8rem,10vw,6.2rem)}}
 @media(max-width:560px){.hero-home .hero-content{padding-top:6.5rem}.hero-home .hero-content>.kicker{font-size:8px;gap:9px}.hero-home .hero-content>.kicker:before,.hero-home .hero-content>.kicker:after{width:22px}.hero-home .hero-content h1{font-size:clamp(3.3rem,15vw,4.7rem);line-height:.94}.hero-home .hero-content>p{font-size:12px}.hero-home .hero-buttons{width:100%;gap:10px}.hero-home .hero-buttons .button{min-width:0;flex:1;padding-inline:12px}}
 
+/* Warm, hero-matched desktop rail */
+.side-rail{
+  background:
+    radial-gradient(circle at 50% 9%,#5a402342 0%,transparent 31%),
+    linear-gradient(180deg,#251a11 0%,#18100b 52%,#0e0a07 100%);
+  border-right-color:#d8b36a57;
+  box-shadow:inset -1px 0 #0008,12px 0 34px #09060335;
+}
+.side-logo{
+  background:#f7f0e4;
+  border:1px solid #d8b36a52;
+  box-shadow:0 12px 28px #0005;
+}
+.side-links a{color:#f4ead7b8}
+.side-links a:hover,.side-links a.is-active{color:#e2bb73}
+.side-links a.is-active:after{background:#c99a4d}
+.vertical-book{background:#c99a4d;color:#17110c}
+.side-actions button{
+  border-color:#d8b36a70;
+  background:#120d098c;
+  color:#f7ead4;
+  transition:background .3s,color .3s,border-color .3s;
+}
+.side-actions button:hover{
+  border-color:#c99a4d;
+  background:#c99a4d;
+  color:#17110c;
+}
+
