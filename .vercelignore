@@ -1,0 +1,7 @@
+research/
+hotel-site-deploy.tar.gz
+vite-dev*.log
+.env
+.env.local
+public/uploads/*
+node_modules/

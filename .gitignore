@@ -5,3 +5,5 @@ dist/
 *.tar.gz
 .openai/*.local.*
 vite-dev*.log
+public/uploads/*
+!public/uploads/.gitkeep

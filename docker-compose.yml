@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: abvi_cms
+      POSTGRES_USER: abvi
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-development-only}
+    ports: ["55432:5432"]
+    volumes: [abvi_postgres:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U abvi -d abvi_cms"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+volumes:
+  abvi_postgres:
