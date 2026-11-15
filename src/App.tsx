@@ -100,21 +100,35 @@ const photos = [
     label: "Room interior",
   },
 ];
+const homeHeroPhotos = [
+  {
+    src: "/assets/hero-premium/home-room-bright-v3.webp",
+    alt: "Bright, refined hotel guest room overlooking Lafayette",
+  },
+  {
+    src: "/assets/hero-premium/home-exterior-bright-v3.webp",
+    alt: "Americas Best Value Inn Lafayette exterior",
+  },
+  {
+    src: "/assets/hero-premium/home-lobby-bright-v3.webp",
+    alt: "Comfortable hotel lobby seating in Lafayette",
+  },
+];
 const pageHeroPhotos: Record<string, { src: string; alt: string }> = {
   Accommodations: {
-    src: "/assets/hero-premium/rooms-hero-v2.png",
+    src: "/assets/hero-premium/rooms-hero-v2.webp",
     alt: "Warm, refined king guest room prepared for a comfortable Lafayette stay",
   },
   "Comfort and convenience": {
-    src: "/assets/hero-premium/amenities-hero-v2.png",
+    src: "/assets/hero-premium/amenities-hero-v2.webp",
     alt: "Welcoming hotel breakfast lounge and coffee service",
   },
   "The neighbourhood": {
-    src: "/assets/hero-premium/location-hero-v2.png",
+    src: "/assets/hero-premium/location-hero-v2.webp",
     alt: "Atmospheric Lafayette streetscape at golden hour",
   },
   "Hotel gallery": {
-    src: "/assets/hero-premium/gallery-hero-v2.png",
+    src: "/assets/hero-premium/gallery-hero-v2.webp",
     alt: "Welcoming hotel entrance illuminated at blue hour",
   },
 };
@@ -630,7 +644,7 @@ function Home({ cms = {} }: { cms?: HomeCMS }) {
     [autoPlay, setAutoPlay] = useState(true),
     heroPhotos = cms.heroImages?.length
       ? cms.heroImages
-      : [photos[0], photos[1], photos[2]];
+      : homeHeroPhotos;
   useEffect(() => {
     if (!autoPlay || matchMedia("(prefers-reduced-motion: reduce)").matches)
       return;
@@ -650,8 +664,10 @@ function Home({ cms = {} }: { cms?: HomeCMS }) {
             src={p.src}
             alt={i === 0 ? p.alt : ""}
             aria-hidden={i !== 0}
-            width="960"
-            height="660"
+            width="1752"
+            height="941"
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchPriority={i === 0 ? "high" : "auto"}
           />
         ))}
         <div className="hero-overlay" />
@@ -1345,6 +1361,82 @@ function Footer({
     </>
   );
 }
+function PageTransition() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const handleNavigation = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+
+      const anchor = (event.target as Element | null)?.closest<HTMLAnchorElement>(
+        "a[href]",
+      );
+      if (!anchor || anchor.target === "_blank" || anchor.hasAttribute("download"))
+        return;
+
+      const destination = new URL(anchor.href, window.location.href);
+      const sameDocumentHash =
+        destination.pathname === window.location.pathname &&
+        destination.search === window.location.search &&
+        destination.hash;
+      if (
+        destination.origin !== window.location.origin ||
+        destination.protocol !== "http:" && destination.protocol !== "https:" ||
+        sameDocumentHash
+      )
+        return;
+
+      event.preventDefault();
+      setLoading(true);
+      document.body.classList.add("page-transitioning");
+      window.setTimeout(() => window.location.assign(destination.href), 420);
+    };
+    const reset = () => {
+      setLoading(false);
+      document.body.classList.remove("page-transitioning");
+    };
+
+    document.addEventListener("click", handleNavigation);
+    window.addEventListener("pageshow", reset);
+    return () => {
+      document.removeEventListener("click", handleNavigation);
+      window.removeEventListener("pageshow", reset);
+      document.body.classList.remove("page-transitioning");
+    };
+  }, []);
+
+  return (
+    <div
+      className={`page-transition${loading ? " is-active" : ""}`}
+      aria-hidden={!loading}
+      aria-live="polite"
+      aria-label="Loading page"
+    >
+      <div className="page-transition__glow" aria-hidden="true" />
+      <div className="page-transition__mark">
+        <span className="page-transition__ring" aria-hidden="true" />
+        <img
+          src="/assets/transition-logo.png"
+          width="1920"
+          height="1080"
+          alt="Americas Best Value Inn"
+        />
+      </div>
+      <div className="page-transition__line" aria-hidden="true">
+        <i />
+      </div>
+      <span className="page-transition__label">Preparing your stay</span>
+    </div>
+  );
+}
 export function App({
   notFound = false,
   page,
@@ -1464,6 +1556,7 @@ export function App({
     );
   return (
     <>
+      <PageTransition />
       <Navigation
         page={current}
         cmsNav={cms.content?.navigation}
