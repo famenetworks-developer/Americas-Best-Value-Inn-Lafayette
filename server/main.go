@@ -114,8 +114,8 @@ func bootstrap(db *pgxpool.Pool) error {
 	if email == "" || pass == "" {
 		return nil
 	}
-	if len(pass) < 8 {
-		return errors.New("ADMIN_PASSWORD must be at least 8 characters")
+	if len(pass) < 5 {
+		return errors.New("ADMIN_PASSWORD must be at least 5 characters")
 	}
 	h, _ := bcrypt.GenerateFromPassword([]byte(pass), 12)
 	_, e := db.Exec(context.Background(), `INSERT INTO users(email,name,password_hash,role) VALUES($1,$2,$3,'super_admin') ON CONFLICT(email) DO NOTHING`, email, env("ADMIN_NAME", "Site Administrator"), string(h))

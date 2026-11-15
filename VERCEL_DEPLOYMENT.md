@@ -36,11 +36,11 @@ In **Project Settings → Environment Variables**, add:
 | `COOKIE_SECURE` | `true` |
 | `ADMIN_EMAIL` | `admin` |
 | `ADMIN_NAME` | `Site Administrator` |
-| `ADMIN_PASSWORD` | `admin123` |
+| `ADMIN_PASSWORD` | Set privately in Vercel; do not commit it |
 | `SITE_URL` | Your final `https://...vercel.app` or custom domain |
 | `PUBLIC_INDEXING` | `false` until launch approval |
 
-`admin123` is accepted because it was explicitly requested, but it is a weak internet-facing password. Replace it with a unique 16+ character password before sharing the URL. Bootstrap variables create the account only when it does not already exist; changing the variable later does not change an existing user's password.
+The requested five-character password is accepted, but it is extremely weak for an internet-facing admin panel. Replace it with a unique 16+ character password before sharing the URL. Bootstrap variables create the account only when it does not already exist; changing the variable later does not change an existing user's password.
 
 ## 5. Persistent media
 
@@ -62,7 +62,7 @@ Login initially with:
 
 ```text
 Admin ID: admin
-Password: admin123
+Password: the private `ADMIN_PASSWORD` value configured in Vercel
 ```
 
 ## 7. Required verification

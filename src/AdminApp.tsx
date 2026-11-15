@@ -12,7 +12,11 @@ import {
   Home,
   Image,
   LayoutDashboard,
+  Eye,
+  EyeOff,
+  LockKeyhole,
   LogOut,
+  Mail,
   Menu,
   Palette,
   Plus,
@@ -103,7 +107,8 @@ export function AdminApp() {
 }
 function Login({ onLogin }: { onLogin: (u: CMSUser) => void }) {
   const [error, setError] = useState(""),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [showPassword, setShowPassword] = useState(false);
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setBusy(true);
@@ -130,27 +135,54 @@ function Login({ onLogin }: { onLogin: (u: CMSUser) => void }) {
   }
   return (
     <main className="login-page">
-      <div className="login-glow" />
-      <section className="login-card">
-        <img src="/assets/logo.svg" alt="Americas Best Value Inn by Sonesta" />
+      <div className="login-shell">
+        <header className="login-brandbar">
+          <a href="/" aria-label="Go to hotel website">
+            <img src="/assets/logo.svg" alt="Americas Best Value Inn by Sonesta" />
+          </a>
+          <span>Lafayette stays&nbsp;&nbsp; / &nbsp;&nbsp;Southern hospitality</span>
+        </header>
+        <div className="login-layout">
+          <section className="login-story" aria-label="Americas Best Value Inn Lafayette">
+            <div className="login-story__eyebrow">
+              <span>Local comfort</span><b>24/7</b><small>Hospitality,<br />every day</small>
+            </div>
+            <div className="login-story__copy">
+              <h1>Comfortable stays,<br />made <em>simple.</em></h1>
+              <p>Manage the details that help every Lafayette guest feel at home.</p>
+            </div>
+          </section>
+          <section className="login-card">
+        <div className="login-card__mark"><img src="/assets/logo.svg" alt="" /></div>
         <span className="admin-kicker">Property content studio</span>
-        <h1>Welcome back.</h1>
-        <p>Sign in to manage the Lafayette hotel website.</p>
+        <h1>Welcome back,</h1>
+        <h2>Manage your Lafayette stay.</h2>
+        <p>Sign in to update the hotel website and guest information.</p>
         <form onSubmit={submit}>
-          <label>
-            Admin ID or email
-            <input name="email" type="text" autoComplete="username" required />
+          <label className="login-field">
+            <Mail size={19} aria-hidden="true" />
+            <span className="sr-only">Admin ID or email</span>
+            <input name="email" type="text" autoComplete="username" placeholder="Admin ID or email" required />
           </label>
-          <label>
-            Password
+          <label className="login-field">
+            <LockKeyhole size={19} aria-hidden="true" />
+            <span className="sr-only">Password</span>
             <input
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               autoComplete="current-password"
+              placeholder="Password"
               required
-              minLength={8}
+              minLength={5}
             />
+            <button type="button" className="password-toggle" onClick={() => setShowPassword((shown) => !shown)} aria-label={showPassword ? "Hide password" : "Show password"}>
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
           </label>
+          <div className="login-options">
+            <label><input type="checkbox" /> <span>Remember me</span></label>
+            <span>Authorized administrators only</span>
+          </div>
           {error && (
             <div className="form-error" role="alert">
               {error}
@@ -162,7 +194,9 @@ function Login({ onLogin }: { onLogin: (u: CMSUser) => void }) {
           </button>
         </form>
         <small>Protected with encrypted credentials and secure sessions.</small>
-      </section>
+          </section>
+        </div>
+      </div>
     </main>
   );
 }
