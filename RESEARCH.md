@@ -31,7 +31,7 @@ Retrieved its HTML and linked `/_astro/about.B2ap8SxX.css`. Observed: 88px fixed
 
 ## Assets included
 
-- `public/assets/logo.svg`: official full-color by-Sonesta brand logo, obtained from the Sonesta page's brand relationship. Original: https://core.sonesta.com/sites/default/files/brand_logos/26/americasbestvalueinn_bysonesta_logo_fullcolor_rgb_0.svg
+- `public/assets/logo.png`: supplied Americas Best Value Inn logo, used as the sole site brand mark.
 - `public/assets/exterior.webp` and `exterior-small.webp`: official hotel entrance photograph, converted from the 1600×500 image at https://core.sonesta.com/sites/default/files/hotel-photos/LA3235/banner/abvi-exterior-image.jpg . Its 1600×333 page rendition was also retrieved during research. The gallery displays the full original image.
 - `public/assets/property/*.jpg`: seven real property-listing photographs supplied through the linked Trip.com listing, covering the exterior, entrance and guest-room views. They are intentionally described as listing photography rather than guaranteed room assignments.
 - `public/assets/display.woff2` and `body.woff2`: Cormorant Garamond and Manrope from Google Fonts, converted to WOFF2 for local delivery. License texts are included in assets.

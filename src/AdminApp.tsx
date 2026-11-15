@@ -138,7 +138,7 @@ function Login({ onLogin }: { onLogin: (u: CMSUser) => void }) {
       <div className="login-shell">
         <header className="login-brandbar">
           <a href="/" aria-label="Go to hotel website">
-            <img src="/assets/logo.svg" alt="Americas Best Value Inn by Sonesta" />
+            <img src="/assets/logo.png" alt="Americas Best Value Inn" />
           </a>
           <span>Lafayette stays&nbsp;&nbsp; / &nbsp;&nbsp;Southern hospitality</span>
         </header>
@@ -153,7 +153,7 @@ function Login({ onLogin }: { onLogin: (u: CMSUser) => void }) {
             </div>
           </section>
           <section className="login-card">
-        <div className="login-card__mark"><img src="/assets/logo.svg" alt="" /></div>
+        <div className="login-card__mark"><img src="/assets/logo.png" alt="" /></div>
         <span className="admin-kicker">Property content studio</span>
         <h1>Welcome back,</h1>
         <h2>Manage your Lafayette stay.</h2>
@@ -223,7 +223,7 @@ function AdminShell({
     <div className={`admin-app ${collapsed ? "is-collapsed" : ""}`}>
       <aside className={mobile ? "is-open" : ""}>
         <div className="admin-brand">
-          <img src="/assets/logo.svg" alt="" />
+          <img src="/assets/logo.png" alt="" />
           <div>
             <b>ABVI Lafayette</b>
             <span>Content studio</span>

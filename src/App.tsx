@@ -10,7 +10,6 @@ import {
 import {
   ArrowLeft,
   ArrowRight,
-  ArrowUp,
   CarFront,
   Check,
   ChevronDown,
@@ -189,10 +188,10 @@ export function pageFromPath(path: string): PageKey {
 function Logo() {
   return (
     <img
-      src="/assets/logo.svg"
+      src="/assets/logo.png"
       width="146"
       height="87"
-      alt="Americas Best Value Inn by Sonesta"
+      alt="Americas Best Value Inn"
     />
   );
 }
@@ -628,17 +627,19 @@ function GalleryGrid({ cmsItems }: { cmsItems?: Record<string, unknown>[] }) {
 }
 function Home({ cms = {} }: { cms?: HomeCMS }) {
   const [slide, setSlide] = useState(0),
+    [autoPlay, setAutoPlay] = useState(true),
     heroPhotos = cms.heroImages?.length
       ? cms.heroImages
       : [photos[0], photos[1], photos[2]];
   useEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!autoPlay || matchMedia("(prefers-reduced-motion: reduce)").matches)
+      return;
     const id = setInterval(
       () => setSlide((v) => (v + 1) % heroPhotos.length),
       6500,
     );
     return () => clearInterval(id);
-  }, [heroPhotos.length]);
+  }, [autoPlay, heroPhotos.length]);
   return (
     <main id="main">
       <section className="hero-home">
@@ -701,7 +702,10 @@ function Home({ cms = {} }: { cms?: HomeCMS }) {
               key={i}
               aria-label={`Show hero image ${i + 1}`}
               aria-pressed={i === slide}
-              onClick={() => setSlide(i)}
+              onClick={() => {
+                setSlide(i);
+                setAutoPlay(false);
+              }}
             />
           ))}
         </div>
@@ -1285,11 +1289,19 @@ function Footer({
           <div>
             <h4>Guest information</h4>
             <a href="/rooms/">Rooms and booking</a>
-            <a href={`tel:${tel}`}>Accessibility inquiries</a>
             <a
-              href={`mailto:${cmsText(footer, "groupSalesEmail", "Sales@redlion.com")}`}
+              href="https://www.sonesta.com/terms-use"
+              target="_blank"
+              rel="noreferrer"
             >
-              Group sales
+              Terms and Conditions
+            </a>
+            <a
+              href="https://www.sonesta.com/privacy"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Privacy Policy
             </a>
             <a href={bookingURL} target="_blank" rel="noreferrer">
               Book now
@@ -1311,22 +1323,16 @@ function Footer({
               Check-out {cmsText(general, "checkOut", "11:00 AM")}
             </p>
           </div>
-        </div>
-        <div className="container footer-bottom">
-          <span>
-            © {new Date().getFullYear()}{" "}
-            {cmsText(footer, "copyright", hotel.name)}
-          </span>
-          <span>
-            {cmsText(
-              footer,
-              "notice",
-              "Hotel details should be confirmed before arrival.",
-            )}
-          </span>
-          <a href="#main" aria-label="Back to top">
-            <ArrowUp />
-          </a>
+          <div className="footer-legal">
+            <span>© 2026 {cmsText(footer, "copyright", hotel.name)}</span>
+            <span>
+              {cmsText(
+                footer,
+                "notice",
+                "Hotel details should be confirmed before arrival.",
+              )}
+            </span>
+          </div>
         </div>
       </footer>
       <div className="mobile-bookbar">
