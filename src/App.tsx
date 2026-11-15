@@ -1347,12 +1347,66 @@ export function App({
   page?: PageKey;
 }) {
   const [cms, setCMS] = useState<PublicCMS>({});
+  const current = notFound
+    ? "404"
+    : page ||
+      (typeof window === "undefined"
+        ? "home"
+        : pageFromPath(window.location.pathname));
   useEffect(() => {
     fetch("/api/public/content")
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then(setCMS)
       .catch(() => {});
   }, []);
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const selectors = [
+      ".section-title",
+      ".booking-card",
+      ".image-stack",
+      ".split-layout > :not(.image-stack)",
+      ".room-card",
+      ".amenity-card",
+      ".gallery-item",
+      ".home-portals > a",
+      ".feature-copy",
+      ".map-frame",
+      ".places > li",
+      ".reviews-inner > *",
+      ".faq-list > details",
+      ".final-cta .container > *",
+      ".footer-grid > *",
+    ];
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>(selectors.join(",")),
+    );
+
+    elements.forEach((element, index) => {
+      element.dataset.reveal = "";
+      element.style.setProperty("--reveal-order", String(index % 4));
+    });
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -9%", threshold: 0.08 },
+    );
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, [current]);
   useEffect(() => {
     const theme = cms.settings?.theme;
     if (!theme) return;
@@ -1371,12 +1425,6 @@ export function App({
         document.documentElement.style.setProperty(token, String(theme[field]));
     });
   }, [cms]);
-  const current = notFound
-    ? "404"
-    : page ||
-      (typeof window === "undefined"
-        ? "home"
-        : pageFromPath(window.location.pathname));
   const content =
     current === "home" ? (
       <Home
